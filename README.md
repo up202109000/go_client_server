@@ -58,9 +58,9 @@ python your_client_model.py
 
 
 
-## Bonus: Playing Against a Stable Baselines 3 PPO Trained Model
+## Bonus: Playing Against a  Stable Baselines 3 PPO Trained Model
 
-To assess the quality of your model, you can play against a Stable Baselines 3 PPO Reinforcement Learning trained model. Follow these steps:
+To assess the quality of your model, you can play against a  Stable Baselines 3 PPO Reinforcement Learning (not very well trained 😅) model. Follow these steps:
 
 
 ##### 1. Install Stable Baselines 3 and sb3-contrib
