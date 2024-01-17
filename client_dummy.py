@@ -56,12 +56,12 @@ async def connect_to_server(host='localhost', port=12345):
         print("\nPLAYS AG", ag)
 
         if ag == 1 or not first:
-            if random.randint(1, 100) <= 5:  # 5% chance to send a PASS move
+            if random.randint(1, 100) <= 5:                                # 5% chance to send a PASS move
                 move = "PASS"
                 print("AG{} passed.".format(ag))
             else:
-                x = random.randint(0, 8)
-                y = random.randint(0, 8)
+                x = random.randint(0, actual_board_size + 1)                # Will generate invalid moves like (7,7) for Go7x7 or moves corresponding to positions already occupied
+                y = random.randint(0, actual_board_size + 1 )
                 print("AG{} played at coordinates ({}, {}) ".format(ag, x, y))
                 move = f"MOVE {x},{y},{0},{0}"
 
