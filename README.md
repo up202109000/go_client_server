@@ -10,7 +10,7 @@ The server code (`server_zoo.py`) serves as a wrapper for the Petting Zoo Classi
 - Generates a graphical representation of the board.
 - Declares the end of the game with the victory of one of the players (`END 1 1 0` or `END 2 0 1`).
 
-For a more detailed explanation of the code, please refer to (`server_client_go_explained.html`).
+For a more detailed and comprehensive explanation of the code, please consult the document titled (`server_client_go_explained.html`) opening it in a web browser.
 
 ### Example Clients
 
