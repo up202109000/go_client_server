@@ -112,7 +112,7 @@ async def start_server(host='localhost', port=12345):
 
         #********************* DEFINE GAME TYPE AND BOARD SIZE **************
 
-        Game = "G9x9"  # "G9x9" 
+        Game = "G9x9"  # "G7x7" 
 
         #********************************************************************
 
