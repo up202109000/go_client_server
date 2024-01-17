@@ -82,7 +82,7 @@ async def connect_to_server(host='localhost', port=12345):
             observation, reward, termination, truncation, info = env.last()
             obs, action_mask = observation.values()
 
-            act = int(model.predict(obs, action_masks=action_mask, deterministic=True)[0])    #generate move based on model prediction
+            act = int(model.predict(obs, action_masks=action_mask, deterministic=True)[0])     #generate a new move based on model prediction for the actual observed environment (obs)
 
             if act == actual_board_size**2:
                 move = "PASS"
