@@ -74,7 +74,7 @@ async def connect_to_server(host='localhost', port=12345):
 
     while True:
         
-        #env.render()
+        #env.render()                   #uncomment the line if you want a local graphical representation of the client
         print("\nPLAYS AG", ag)
 
         if ag == 1 or not first:
