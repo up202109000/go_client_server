@@ -78,7 +78,7 @@ async def connect_to_server(host='localhost', port=12345):
             observation, reward, termination, truncation, info = env.last()
             obs, action_mask = observation.values()
 
-            act = env.action_space(env.agent_selection).sample(action_mask)
+            act = env.action_space(env.agent_selection).sample(action_mask)     #generates a random VALID move 
 
             if act == actual_board_size**2:
                 move = "PASS"
