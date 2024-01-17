@@ -52,7 +52,7 @@ async def connect_to_server(host='localhost', port=12345):
         ag=2
     first=True
 
-
+    #Create the environment
     env = go_v5.env(render_mode=None , board_size=actual_board_size, komi=5.5,screen_height=300)
     env.reset()
 
@@ -65,6 +65,7 @@ async def connect_to_server(host='localhost', port=12345):
     elif actual_board_size == 7:
         model_path = f"{models_dir}/best_7"
 
+    #Load the model
     model = MaskablePPO.load(model_path)
   
     print('*' * 50)
@@ -81,7 +82,7 @@ async def connect_to_server(host='localhost', port=12345):
             observation, reward, termination, truncation, info = env.last()
             obs, action_mask = observation.values()
 
-            act = int(model.predict(obs, action_masks=action_mask, deterministic=True)[0])
+            act = int(model.predict(obs, action_masks=action_mask, deterministic=True)[0])    #generate move based on model prediction
 
             if act == actual_board_size**2:
                 move = "PASS"
@@ -94,7 +95,8 @@ async def connect_to_server(host='localhost', port=12345):
             client_socket.send(move.encode())
             print("Send:",move)
         
-            # Wait for server response
+            # Wait for server response to confirm if our move is "VALID", "INVALID" or "TIMEOUT" 
+            
             response = client_socket.recv(1024).decode()
             print(f"Server Response1: {response}")
            
@@ -102,19 +104,21 @@ async def connect_to_server(host='localhost', port=12345):
                 process_end(response)
                 break
 
-            elif "INVALID" in response:
+            elif "INVALID" in response:                #if invalid produce a new move
                 continue
 
-            elif "TIMEOUT" in response:
+            elif "TIMEOUT" in response:                #if timeout do nothing because the server has assumed that we passed
                 pass
 
             else:
-                if termination == False and truncation == False:
-                    env.step(act)
+                if termination == False and truncation == False:         # if the game is not finished
+                    env.step(act)                                        #actualize the environment with our move
 
-            
+    
         first=False
-
+        
+        # Wait for server response concerning opponent move
+        
         response = client_socket.recv(1024).decode()
         print(f"Server Response2: {response}")
 
@@ -148,7 +152,7 @@ async def connect_to_server(host='localhost', port=12345):
 
             
             if  termination == False and truncation == False:
-                env.step(act)
+                env.step(act)                                                 #actualize the environment with opponent move
                 opponent = 'AG2' if ag == 1 else 'AG1'
                 print("{} played at coordinates ({}, {})  ( action: {} )".format(opponent, x, y, act))
 
