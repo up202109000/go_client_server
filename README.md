@@ -23,7 +23,6 @@ In order to test the server code, several different clients have been implemente
    - `client_zoo_model.py`: This client strictly adheres to the game rules and utilizes a trained model. It may produce a 'TIMEOUT' if the model takes more than 10 seconds to generate a move.
 
 
-
 ## Requirements
 
 - Python version >= 3.10.13
@@ -39,4 +38,48 @@ pip install aioconsole
 
 ## Usage
 
-The server can run on a different machine than the clients, as long as they are on the same IP subnet. Update the host in both the server and clients accordingly.
+The server can run on a different machine than the clients, as long as they are on the same IP subnet. 
+Update the host in both the server and clients accordingly.
+
+##### 1. Start the server
+```bash
+python server_zoo.py
+```
+
+##### 2. In a different terminal, launch a client (Dummy client in this example):
+```bash
+python client_dummy.py
+```
+
+##### 3. In yet another terminal, start another client (your model):
+```bash
+python your_client_model.py
+```
+
+
+
+## Bonus: Playing Against a Stable Baselines 3 PPO Trained Model
+
+To assess the quality of your model, you can play against a Stable Baselines 3 PPO Reinforcement Learning trained model. Follow these steps:
+
+
+##### 1. Install Stable Baselines 3 and sb3-contrib
+```bash
+pip install stable-baselines3 
+pip install sb3-contrib
+```
+
+##### 2. Start the server
+```bash
+python server_zoo.py
+```
+
+##### 3. In a different terminal, launch the PPO model
+```bash
+python client_zoo_model.py
+```
+##### 4. In yet another terminal, start your client model:
+```bash
+python your_client_model.py
+```
+Enjoy!
